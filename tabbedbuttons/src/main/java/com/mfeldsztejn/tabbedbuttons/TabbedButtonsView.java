@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -80,11 +82,13 @@ public class TabbedButtonsView extends LinearLayout {
         }
     }
 
-    public void setButtonBackground(Drawable background){
-        this.buttonBackground = background;
+    public void setDrawables(@Nullable Drawable buttonBackground, @Nullable Drawable buttonDrawable){
+        this.buttonBackground = buttonBackground;
+        this.buttonDrawable = buttonDrawable;
         for (int i = 0; i < radioGroup.getChildCount(); i++) {
             RadioButton childAt = (RadioButton) radioGroup.getChildAt(i);
             setRadioButtonBackground(childAt);
+            childAt.setButtonDrawable(buttonDrawable);
         }
     }
 
