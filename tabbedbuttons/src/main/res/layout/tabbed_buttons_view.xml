@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       tools:displayIn="LinearLayout">
+
+        <TextView
+            android:id="@+id/tabbed_button_view_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="?editTextColor"
+            android:textSize="18sp"
+            tools:text="Title"/>
+
+        <RadioGroup
+            android:id="@+id/tabbed_button_view_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+        </RadioGroup>
+
+</merge>
