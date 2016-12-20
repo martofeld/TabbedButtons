@@ -5,10 +5,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -47,20 +44,34 @@ public class TabbedButtonsView extends LinearLayout {
     private void init(Context context, AttributeSet attrs) {
         setOrientation(VERTICAL);
         inflate(context, R.layout.tabbed_buttons_view, this);
+        this.radioGroup = (RadioGroup) findViewById(R.id.tabbed_button_view_radio_group);
+        this.title = (TextView) findViewById(R.id.tabbed_button_view_title);
+
         if(attrs == null){
             return;
         }
         TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TabbedButtonsView, 0, 0);
 
-        this.radioGroup = (RadioGroup) findViewById(R.id.tabbed_button_view_radio_group);
-        this.title = (TextView) findViewById(R.id.tabbed_button_view_title);
-
         String title = a.getString(R.styleable.TabbedButtonsView_groupTitle);
 
-        if (TextUtils.isEmpty(title)) {
+        setTitle(title);
+    }
+
+    public void setTitle(String title) {
+        if(TextUtils.isEmpty(title)){
             this.title.setVisibility(GONE);
         } else {
             this.title.setText(title);
+        }
+    }
+
+    public void setOptions(TabButton... options){
+        RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.weight = 1f / options.length;
+        for (TabButton option : options) {
+            RadioButton radioButton = new RadioButton(getContext());
+            radioButton.setTag(option);
+            radioGroup.addView(radioButton);
         }
     }
 }
