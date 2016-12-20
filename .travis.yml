@@ -1,0 +1,19 @@
+sudo: required
+dist: precise
+group: edge
+
+language: android
+
+jdk: oraclejdk8
+
+git:
+    depth: 10
+
+android:
+  components:
+    - build-tools-24.0.3
+    - android-24
+
+script:
+  - ./gradlew tabbedbuttons:build
+  - ./gradlew testapp:build
