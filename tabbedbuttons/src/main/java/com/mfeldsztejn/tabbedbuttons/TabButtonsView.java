@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -20,32 +19,15 @@ import android.widget.TextView;
  * Created by mfeldsztejn on 12/20/16.
  */
 
-public class TabbedButtonsView extends LinearLayout {
+public class TabButtonsView extends LinearLayout {
     private RadioGroup radioGroup;
     private TextView title;
     private Drawable buttonBackground;
     private Drawable buttonDrawable;
 
-    public TabbedButtonsView(Context context) {
+    public TabButtonsView(Context context) {
         super(context);
         init(context, null);
-    }
-
-    public TabbedButtonsView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context, attrs);
-    }
-
-    @TargetApi(11)
-    public TabbedButtonsView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(context, attrs);
-    }
-
-    @TargetApi(21)
-    public TabbedButtonsView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs);
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -57,11 +39,11 @@ public class TabbedButtonsView extends LinearLayout {
         if(attrs == null){
             return;
         }
-        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TabbedButtonsView, 0, 0);
+        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TabButtonsView, 0, 0);
 
-        String title = a.getString(R.styleable.TabbedButtonsView_groupTitle);
-        buttonBackground = a.getDrawable(R.styleable.TabbedButtonsView_buttonBackground);
-        buttonDrawable  = a.getDrawable(R.styleable.TabbedButtonsView_buttonDrawable);
+        String title = a.getString(R.styleable.TabButtonsView_groupTitle);
+        buttonBackground = a.getDrawable(R.styleable.TabButtonsView_buttonBackground);
+        buttonDrawable = a.getDrawable(R.styleable.TabButtonsView_buttonDrawable);
 
         setTitle(title);
     }
@@ -74,21 +56,28 @@ public class TabbedButtonsView extends LinearLayout {
         }
     }
 
+    public TabButtonsView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context, attrs);
+    }
+
+    @TargetApi(11)
+    public TabButtonsView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context, attrs);
+    }
+
+    @TargetApi(21)
+    public TabButtonsView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(context, attrs);
+    }
+
     public void setOptions(TabButton... options){
         RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.weight = 1f / options.length;
         for (TabButton option : options) {
             radioGroup.addView(getRadioButton(layoutParams, option));
-        }
-    }
-
-    public void setDrawables(@Nullable Drawable buttonBackground, @Nullable Drawable buttonDrawable){
-        this.buttonBackground = buttonBackground;
-        this.buttonDrawable = buttonDrawable;
-        for (int i = 0; i < radioGroup.getChildCount(); i++) {
-            RadioButton childAt = (RadioButton) radioGroup.getChildAt(i);
-            setRadioButtonBackground(childAt);
-            childAt.setButtonDrawable(buttonDrawable);
         }
     }
 
@@ -108,6 +97,16 @@ public class TabbedButtonsView extends LinearLayout {
             radioButton.setBackground(buttonBackground);
         } else {
             radioButton.setBackgroundDrawable(buttonBackground);
+        }
+    }
+
+    public void setDrawables(@Nullable Drawable buttonBackground, @Nullable Drawable buttonDrawable) {
+        this.buttonBackground = buttonBackground;
+        this.buttonDrawable = buttonDrawable;
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            RadioButton childAt = (RadioButton) radioGroup.getChildAt(i);
+            setRadioButtonBackground(childAt);
+            childAt.setButtonDrawable(buttonDrawable);
         }
     }
 }

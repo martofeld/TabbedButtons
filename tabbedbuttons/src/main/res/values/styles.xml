@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="TabbedButtonsView">
+    <declare-styleable name="TabButtonsView">
         <attr name="groupTitle" format="string|reference"/>
         <attr name="buttonBackground" format="color|reference"/>
         <attr name="buttonDrawable" format="color|reference"/>
