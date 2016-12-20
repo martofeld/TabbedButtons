@@ -3,8 +3,11 @@ package com.mfeldsztejn.tabbedbuttons;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 public class TabbedButtonsView extends LinearLayout {
     private RadioGroup radioGroup;
     private TextView title;
+    private Drawable buttonBackground;
 
     public TabbedButtonsView(Context context) {
         super(context);
@@ -53,6 +57,7 @@ public class TabbedButtonsView extends LinearLayout {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TabbedButtonsView, 0, 0);
 
         String title = a.getString(R.styleable.TabbedButtonsView_groupTitle);
+        buttonBackground = a.getDrawable(R.styleable.TabbedButtonsView_buttonBackground);
 
         setTitle(title);
     }
@@ -69,9 +74,33 @@ public class TabbedButtonsView extends LinearLayout {
         RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.weight = 1f / options.length;
         for (TabButton option : options) {
-            RadioButton radioButton = new RadioButton(getContext());
-            radioButton.setTag(option);
-            radioGroup.addView(radioButton);
+            radioGroup.addView(getRadioButton(layoutParams, option));
+        }
+    }
+
+    public void setButtonBackground(Drawable background){
+        this.buttonBackground = background;
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            RadioButton childAt = (RadioButton) radioGroup.getChildAt(i);
+            setRadioButtonBackground(childAt);
+        }
+    }
+
+    private RadioButton getRadioButton(RadioGroup.LayoutParams layoutParams, TabButton option) {
+        RadioButton radioButton = new RadioButton(getContext());
+        radioButton.setLayoutParams(layoutParams);
+        radioButton.setTag(option);
+        radioButton.setText(option.getText());
+        setRadioButtonBackground(radioButton);
+        radioButton.setGravity(Gravity.CENTER);
+        return radioButton;
+    }
+
+    private void setRadioButtonBackground(RadioButton radioButton){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
+            radioButton.setBackground(buttonBackground);
+        } else {
+            radioButton.setBackgroundDrawable(buttonBackground);
         }
     }
 }
