@@ -22,6 +22,7 @@ public class TabbedButtonsView extends LinearLayout {
     private RadioGroup radioGroup;
     private TextView title;
     private Drawable buttonBackground;
+    private Drawable buttonDrawable;
 
     public TabbedButtonsView(Context context) {
         super(context);
@@ -58,6 +59,7 @@ public class TabbedButtonsView extends LinearLayout {
 
         String title = a.getString(R.styleable.TabbedButtonsView_groupTitle);
         buttonBackground = a.getDrawable(R.styleable.TabbedButtonsView_buttonBackground);
+        buttonDrawable  = a.getDrawable(R.styleable.TabbedButtonsView_buttonDrawable);
 
         setTitle(title);
     }
@@ -91,6 +93,7 @@ public class TabbedButtonsView extends LinearLayout {
         radioButton.setLayoutParams(layoutParams);
         radioButton.setTag(option);
         radioButton.setText(option.getText());
+        radioButton.setButtonDrawable(buttonDrawable);
         setRadioButtonBackground(radioButton);
         radioButton.setGravity(Gravity.CENTER);
         return radioButton;

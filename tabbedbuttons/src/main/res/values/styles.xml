@@ -3,6 +3,7 @@
     <declare-styleable name="TabbedButtonsView">
         <attr name="groupTitle" format="string|reference"/>
         <attr name="buttonBackground" format="color|reference"/>
+        <attr name="buttonDrawable" format="color|reference"/>
     </declare-styleable>
 
 </resources>
