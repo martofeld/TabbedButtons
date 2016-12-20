@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,12 +21,13 @@ import android.widget.TextView;
  * Created by mfeldsztejn on 12/20/16.
  */
 
-public class TabButtonsView extends LinearLayout {
+public class TabButtonsView extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
     private RadioGroup radioGroup;
     private TextView title;
     private Drawable buttonBackground;
     private Drawable buttonDrawable;
     private int buttonTextColor;
+    private TabButtonSelectedCallback tabButtonSelectedCallback;
 
     public TabButtonsView(Context context) {
         super(context);
@@ -82,6 +84,10 @@ public class TabButtonsView extends LinearLayout {
         init(context, attrs);
     }
 
+    public void setTabButtonSelectedCallback(TabButtonSelectedCallback callback) {
+        this.tabButtonSelectedCallback = callback;
+    }
+
     public void setOptions(TabButton... options){
         RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.weight = 1f / options.length;
@@ -99,6 +105,7 @@ public class TabButtonsView extends LinearLayout {
         radioButton.setButtonDrawable(buttonDrawable);
         setRadioButtonBackground(radioButton);
         radioButton.setGravity(Gravity.CENTER);
+        radioButton.setOnCheckedChangeListener(this);
         return radioButton;
     }
 
@@ -117,6 +124,13 @@ public class TabButtonsView extends LinearLayout {
             RadioButton childAt = (RadioButton) radioGroup.getChildAt(i);
             setRadioButtonBackground(childAt);
             childAt.setButtonDrawable(buttonDrawable);
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (tabButtonSelectedCallback != null && isChecked) {
+            tabButtonSelectedCallback.onTabButtonSelected((TabButton) buttonView.getTag());
         }
     }
 }
