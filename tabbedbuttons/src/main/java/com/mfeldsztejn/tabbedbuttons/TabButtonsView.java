@@ -3,6 +3,7 @@ package com.mfeldsztejn.tabbedbuttons;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ public class TabButtonsView extends LinearLayout {
     private TextView title;
     private Drawable buttonBackground;
     private Drawable buttonDrawable;
+    private int buttonTextColor;
 
     public TabButtonsView(Context context) {
         super(context);
@@ -44,8 +46,11 @@ public class TabButtonsView extends LinearLayout {
         String title = a.getString(R.styleable.TabButtonsView_groupTitle);
         buttonBackground = a.getDrawable(R.styleable.TabButtonsView_buttonBackground);
         buttonDrawable = a.getDrawable(R.styleable.TabButtonsView_buttonDrawable);
+        buttonTextColor = a.getColor(R.styleable.TabButtonsView_buttonTextColor, Color.WHITE);
+        int titleTextColor = a.getColor(R.styleable.TabButtonsView_titleTextColor, Color.BLACK);
 
         setTitle(title);
+        setTitleTextColor(titleTextColor);
     }
 
     public void setTitle(String title) {
@@ -54,6 +59,10 @@ public class TabButtonsView extends LinearLayout {
         } else {
             this.title.setText(title);
         }
+    }
+
+    private void setTitleTextColor(int titleTextColor) {
+        this.title.setTextColor(titleTextColor);
     }
 
     public TabButtonsView(Context context, AttributeSet attrs) {
@@ -86,6 +95,7 @@ public class TabButtonsView extends LinearLayout {
         radioButton.setLayoutParams(layoutParams);
         radioButton.setTag(option);
         radioButton.setText(option.getText());
+        radioButton.setTextColor(buttonTextColor);
         radioButton.setButtonDrawable(buttonDrawable);
         setRadioButtonBackground(radioButton);
         radioButton.setGravity(Gravity.CENTER);

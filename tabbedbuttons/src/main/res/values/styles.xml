@@ -4,6 +4,8 @@
         <attr name="groupTitle" format="string|reference"/>
         <attr name="buttonBackground" format="color|reference"/>
         <attr name="buttonDrawable" format="color|reference"/>
+        <attr name="buttonTextColor" format="color"/>
+        <attr name="titleTextColor" format="color"/>
     </declare-styleable>
 
 </resources>
