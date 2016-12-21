@@ -20,5 +20,5 @@ android:
     - extra-android-support
 
 script:
-  - ./gradlew tabbedbuttons:build
+  - ./gradlew tabbedbuttons:build testDebugUnitTestCoverage coveralls
   - ./gradlew testapp:build
