@@ -20,5 +20,5 @@ android:
     - extra-android-support
 
 script:
-  - ./gradlew tabbedbuttons:build
+  - ./gradlew tabbedbuttons:build jacocoFullReport coveralls
   - ./gradlew testapp:build
