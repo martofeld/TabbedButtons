@@ -21,7 +21,7 @@ import android.widget.TextView;
  * Created by mfeldsztejn on 12/20/16.
  */
 
-public class TabButtonsView extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
+public final class TabButtonsView extends LinearLayout implements CompoundButton.OnCheckedChangeListener {
     private RadioGroup radioGroup;
     private TextView title;
     private Drawable buttonBackground;
@@ -132,5 +132,17 @@ public class TabButtonsView extends LinearLayout implements CompoundButton.OnChe
         if (tabButtonSelectedCallback != null && isChecked) {
             tabButtonSelectedCallback.onTabButtonSelected((TabButton) buttonView.getTag());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "TabButtonsView{" +
+                "radioGroup=" + radioGroup +
+                ", title=" + title +
+                ", buttonBackground=" + buttonBackground +
+                ", buttonDrawable=" + buttonDrawable +
+                ", buttonTextColor=" + buttonTextColor +
+                ", tabButtonSelectedCallback=" + tabButtonSelectedCallback +
+                '}';
     }
 }

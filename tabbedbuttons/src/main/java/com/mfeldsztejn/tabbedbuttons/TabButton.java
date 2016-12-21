@@ -5,8 +5,8 @@ package com.mfeldsztejn.tabbedbuttons;
  */
 
 public class TabButton {
-    private String text;
-    private Object tag;
+    private final String text;
+    private final Object tag;
 
     public TabButton(String text, Object tag) {
         this.text = text;
@@ -21,4 +21,11 @@ public class TabButton {
         return (T) tag;
     }
 
+    @Override
+    public String toString() {
+        return "TabButton{" +
+                "text='" + text + '\'' +
+                ", tag=" + tag +
+                '}';
+    }
 }
