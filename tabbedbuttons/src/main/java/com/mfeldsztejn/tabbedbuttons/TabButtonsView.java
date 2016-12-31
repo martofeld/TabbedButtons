@@ -43,7 +43,7 @@ public final class TabButtonsView extends LinearLayout implements CompoundButton
         if(attrs == null){
             return;
         }
-        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.TabButtonsView, 0, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabButtonsView, 0, 0);
 
         String title = a.getString(R.styleable.TabButtonsView_groupTitle);
         buttonBackground = a.getDrawable(R.styleable.TabButtonsView_buttonBackground);
@@ -53,6 +53,8 @@ public final class TabButtonsView extends LinearLayout implements CompoundButton
 
         setTitle(title);
         setTitleTextColor(titleTextColor);
+
+        a.recycle();
     }
 
     public void setTitle(String title) {
