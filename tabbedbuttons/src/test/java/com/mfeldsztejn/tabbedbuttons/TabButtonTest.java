@@ -2,7 +2,7 @@ package com.mfeldsztejn.tabbedbuttons;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static junit.framework.Assert.assertEquals;
 
 /**
  * Created by mfeldsztejn on 12/21/16.
@@ -34,10 +34,10 @@ public class TabButtonTest {
     }
 
     private static class TabButtonTag {
-        String data1;
-        String data2;
+        /* default */ String data1;
+        /* default */ String data2;
 
-        TabButtonTag(String data1, String data2) {
+        /* default */ TabButtonTag(String data1, String data2) {
             this.data1 = data1;
             this.data2 = data2;
         }

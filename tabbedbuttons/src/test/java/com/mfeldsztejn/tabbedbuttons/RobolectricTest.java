@@ -10,6 +10,7 @@ import org.robolectric.annotation.Config;
 /**
  * Created by mfeldsztejn on 12/22/16.
  */
+@SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = "./src/main/AndroidManifest.xml", sdk = 18, constants = BuildConfig.class)
 public abstract class RobolectricTest {
